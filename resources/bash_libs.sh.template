@@ -1,0 +1,7 @@
+if [ -d "$PATH_REPO/libs" ]; then
+    for lib in "$PATH_REPO/libs/*"; do
+        if [ -f "$lib" ]; then
+            source "$lib"
+        fi
+    done
+fi

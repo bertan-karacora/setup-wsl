@@ -2,7 +2,7 @@ set -a
 
 ssh_uni() {
     local host_login="login-stud.informatik.uni-bonn.de"
-    local host_destination_default="robo18"
+    local host_destination_default="robo24"
     local username_default="karacora"
     local ports_default=("9999")
 

@@ -28,4 +28,21 @@ append_if_not_contained() {
     fi
 }
 
+ask_yesno() {
+    while true; do
+        read -p "Do you wish to use the recommended settings? " yesno
+        case "$yesno" in
+        [Yy]*)
+            return 0
+            ;;
+        [Nn]*)
+            return 1
+            ;;
+        *)
+            echo "Please answer yes or no."
+            ;;
+        esac
+    done
+}
+
 set +a

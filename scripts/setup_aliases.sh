@@ -1,8 +1,5 @@
 #!/usr/bin/env bash
 
-# If you are using a dedicated NVIDIA card this is a solution to a common problem with OpenGL.
-# The effect can be tested e.g. using glxgears.
-
 set -e -u -o pipefail
 
 readonly path_repo="$(dirname $(dirname $(realpath $BASH_SOURCE)))"
@@ -10,9 +7,9 @@ source "$path_repo/libs/io_utils.sh"
 
 show_help() {
     echo "Usage:"
-    echo "  ./fix_gpu_selection.sh [-h|--help]"
+    echo "  ./setup_aliases.sh [-h|--help]"
     echo
-    echo "Fix GPU selection."
+    echo "Setup bash aliases."
     echo
 }
 
@@ -34,21 +31,24 @@ parse_args() {
     done
 }
 
-fix_gpu_selection() {
+setup_aliases() {
+    echo "Setting up bash aliases..."
+
+    local string_bash_aliases="$(PATH_REPO=$path_repo envsubst '$PATH_REPO' < $path_repo/resources/bash_aliases.sh.template)"
     local string_bashrc="
-# Fix OpenGL rendering
-export MESA_D3D12_DEFAULT_ADAPTER_NAME=NVIDIA"
+if [ -f ~/.bash_aliases ]; then
+    . ~/.bash_aliases
+fi"
 
-    echo "Fix GPU selection ..."
+    append_if_not_contained "$HOME/.bash_aliases" "$string_bash_aliases"
+    append_if_not_contained "$HOME/.bashrc" "$string_bashrc"
 
-    append_if_not_contained ~/.bashrc "$string_bashrc"
-
-    echo "Fix GPU selection finished"
+    echo "Setting up bash aliases finished"
 }
 
 main() {
     parse_args "$@"
-    fix_gpu_selection
+    setup_aliases
 }
 
 if [[ "${BASH_SOURCE[0]}" == "$0" ]]; then

@@ -1,12 +1,12 @@
 [user]
 	name = Bertan Karacora
 	email = bertan.karacora@gmail.com
-[credential]
-	helper = /mnt/c/Program Files/Git/mingw64/bin/git-credential-manager.exe
+[init]
+	defaultBranch = main
 [pull]
 	rebase = true
 [core]
 	autocrlf = input
 	editor = code --wait
-[init]
-	defaultBranch = main
+[credential]
+	helper = /mnt/c/Program Files/Git/mingw64/bin/git-credential-manager.exe

@@ -1,0 +1,3 @@
+if [ -f "$PATH_REPO/aliases/aliases.sh" ]; then
+    source "$PATH_REPO/aliases/aliases.sh"
+fi

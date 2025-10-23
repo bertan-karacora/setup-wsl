@@ -1,31 +1,41 @@
 # Useful scripts and configs for WSL
 
-A collection of useful scripts and configs I created for the WSL2 system.
+A collection of useful scripts and configs for a quick setup of the WSL2 system.
+
+## Setup
+
+Start WSL by typing `wsl` from within a Windows shell. For the installation, refer to the [official documentation](https://learn.microsoft.com/en-us/windows/wsl/install).
+
+Download this repository. Since setting up git is part of this, you could use wget:
+
+```bash
+cd ~
+sudo apt install unzip wget
+wget https://github.com/bertan-karacora/setup-ubuntu/archive/refs/heads/main.zip
+unzip main.zip
+rm main.zip
+mv setup-ubuntu-main setup-ubuntu
+```
+
+Make sure to give execution permission for the setup script:
+
+```bash
+cd setup-ubuntu
+chmod +x setup.sh
+```
+
+## Installation
+
+1. Run the setup script (without sudo, you do require sudo rights and might be prompted for a password):
+
+    ```bash
+    ./setup.sh
+    ```
+
+Restart your shell to have it take effect.
 
 ## Usage
 
-1. Start WSL by typing `wsl` from within a Windows shell. For the installation, refer to the [official documentation](https://learn.microsoft.com/en-us/windows/wsl/install).
+The system has been setup for you.
 
-2. Download this repository. For example:
-
-    ```bash
-    cd ~
-    sudo apt install wget
-    wget https://github.com/bertan-karacora/useful-scripts-and-configs-for-wsl/archive/refs/heads/main.zip
-    unzip main.zip
-    rm main.zip
-    mv useful-scripts-and-configs-for-wsl-main useful-scripts-and-configs-for-wsl
-    ```
-
-3. Make sure to give execution permission for setup script using
-
-    ```bash
-    cd useful-scripts-and-configs-for-wsl
-    chmod +x setup.sh
-    ```
-
-4. Run it with sudo.
-
-    ```bash
-    sudo ./setup.sh
-    ```
+You can now use the bash_aliases from `bash_aliases.sh.template`, the functions in any file in the `libs` directory, and the scripts in the `scripts` directory.

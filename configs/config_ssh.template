@@ -1,0 +1,56 @@
+Host github-hpc
+    HostName github.com
+    IdentityFile ~/.ssh/id_ed25519_hpc
+    IdentitiesOnly yes
+    
+Host jureca
+    HostName jureca.fz-juelich.de
+    User karacora1
+    ForwardAgent no
+    IdentityFile ~/.ssh/id_ed25519_hpc
+    IdentitiesOnly yes
+
+Host edna
+    HostName edna.informatik.uni-bonn.de
+    User karacora
+    ProxyJump karacora@login-stud.informatik.uni-bonn.de
+
+Host jetson
+    HostName jetson
+    User jetson
+    ProxyJump edna
+
+Host robo18
+    HostName robo18
+    User karacora
+    ProxyJump karacora@login-stud.informatik.uni-bonn.de
+
+Host robo24
+    HostName robo24
+    User karacora
+    ProxyJump karacora@login-stud.informatik.uni-bonn.de
+
+Host cuda3
+    HostName cuda3.informatik.uni-bonn.de
+    User karacora
+    ProxyJump karacora@login-stud.informatik.uni-bonn.de
+
+Host cuda4
+    HostName cuda4.informatik.uni-bonn.de
+    User karacora
+    ProxyJump karacora@login-stud.informatik.uni-bonn.de
+
+Host cuda5
+    HostName cuda5.informatik.uni-bonn.de
+    User karacora
+    ProxyJump karacora@login-stud.informatik.uni-bonn.de
+
+Host cuda6
+    HostName cuda6.informatik.uni-bonn.de
+    User karacora
+    ProxyJump karacora@login-stud.informatik.uni-bonn.de
+
+Host cuda7
+    HostName cuda7.informatik.uni-bonn.de
+    User karacora
+    ProxyJump karacora@login-stud.informatik.uni-bonn.de

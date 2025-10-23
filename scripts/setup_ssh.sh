@@ -1,53 +1,83 @@
 #!/usr/bin/env bash
 
-set -euo pipefail
+set -e -u -o pipefail
 
-username=""
+readonly path_repo="$(dirname $(dirname $(realpath $BASH_SOURCE)))"
 
-read_username() {
-    echo "Username: "
-    read -r username
+comment=""
+
+show_help() {
+    echo "Usage:"
+    echo "  ./setup_ssh.sh [-h|--help]"
+    echo
+    echo "Setup ssh."
+    echo
+}
+
+parse_args() {
+    local arg=""
+    while [[ "$#" -gt 0 ]]; do
+        arg="$1"
+        shift
+        case $arg in
+        -h | --help)
+            show_help
+            exit 0
+            ;;
+        *)
+            echo "Unknown option $arg"
+            exit 1
+            ;;
+        esac
+    done
+}
+
+read_comment() {
+    echo "Comment:"
+    read -r comment
 }
 
 generate_sshkey() {
-    local email=""
-    local path_key_windows="/mnt/c/Users/$username/.ssh/id_ed25519"
+    echo "Generating SSH keys..."
 
-    echo "Generating SSH keys ..."
+    local path_key="$HOME/.ssh/id_ed25519"
 
-    if [[ -f $path_key_windows ]]; then
-        echo "Key already exists at: $path_key_windows"
+    if [[ -f "$path_key" ]]; then
+        echo "Key already exists at $path_key"
         return 0
     fi
 
-    echo "Your email: "
-    read -r email
-    ssh-keygen -t ed25519 -C "$email" -f "$path_key_windows"
+    read_comment
+
+    ssh-keygen -t ed25519 -C "$comment" -f "$path_key"
 
     echo "Generating SSH keys finished"
 }
 
-copy_keys() {
-    echo "Copying SSH keys to WSL..."
+configure_ssh() {
+    echo "Configuring SSH..."
 
-    cp -r "/mnt/c/Users/$username/.ssh/id_"* /home/$username/.ssh
-    chmod 600 /home/$username/.ssh/id_*
+    local string_config_ssh="$(< $path_repo/configs/config_ssh.template)"
 
-    echo "Copying SSH keys to WSL finished"
-}
+    mkdir --parents "$HOME/.ssh"
+    touch "$HOME/.ssh/config"
+    chmod 600 "$HOME/.ssh/config"
 
-setup_ssh() {
-    echo "Configuring SSH ..."
-
-    generate_sshkey
-    copy_keys
+    append_if_not_contained "$HOME/.ssh/config" "$string_config_ssh"
 
     echo "Configuring SSH finished"
 }
 
+setup_ssh() {
+    generate_sshkey
+    configure_ssh
+}
+
 main() {
-    read_username
+    parse_args "$@"
     setup_ssh
 }
 
-main "$@"
+if [[ "${BASH_SOURCE[0]}" == "$0" ]]; then
+    main "$@"
+fi
