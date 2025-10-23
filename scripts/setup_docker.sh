@@ -50,6 +50,14 @@ install_docker() {
         fi
     done
 
+    curl -fsSL https://nvidia.github.io/libnvidia-container/gpgkey | \
+            sudo gpg --dearmor -o /usr/share/keyrings/nvidia-container-toolkit-keyring.gpg && \
+        curl -s -L https://nvidia.github.io/libnvidia-container/stable/deb/nvidia-container-toolkit.list | \
+            sed 's#deb https://#deb [signed-by=/usr/share/keyrings/nvidia-container-toolkit-keyring.gpg] https://#g' | \
+            sudo tee /etc/apt/sources.list.d/nvidia-container-toolkit.list
+    sudo apt-get update --quiet
+    sudo apt-get install --quiet --assume-yes nvidia-container-toolkit
+
     echo "Installing Docker finished"
 }
 
@@ -58,6 +66,8 @@ configure_docker() {
 
     getent group docker >/dev/null || sudo groupadd docker
     sudo usermod -aG docker "$USER"
+
+    sudo systemctl restart docker
 
     echo "Configuring Docker finished"
 }
