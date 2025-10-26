@@ -50,6 +50,7 @@ main() {
     sudo scripts/disable_sudo_password.sh "$USER"
     ./scripts/disable_apt_marketing_message.sh
     ./scripts/fix_gpu_selection.sh
+    ./scripts/setup_wsl2.sh
     ./scripts/setup_git.sh
     ./scripts/setup_ssh.sh
     ./scripts/setup_docker.sh

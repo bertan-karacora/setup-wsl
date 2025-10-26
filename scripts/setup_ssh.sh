@@ -68,14 +68,10 @@ configure_ssh() {
     echo "Configuring SSH finished"
 }
 
-setup_ssh() {
-    generate_sshkey
-    configure_ssh
-}
-
 main() {
     parse_args "$@"
-    setup_ssh
+    generate_sshkey
+    configure_ssh
 }
 
 if [[ "${BASH_SOURCE[0]}" == "$0" ]]; then
