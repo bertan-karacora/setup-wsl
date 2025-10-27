@@ -4,7 +4,7 @@ ssh_uni() {
     local host_login="login-stud.informatik.uni-bonn.de"
     local host_destination_default="robo24"
     local username_default="karacora"
-    local ports_default=("9999")
+    local ports_default=("8889")
 
     local host_destination="$host_destination_default"
     local username="$username_default"
@@ -15,7 +15,7 @@ ssh_uni() {
 
     show_help() {
         echo "Usage:"
-        echo "  ssh_uni [-H <host>] [-U <username>] <port1> <port2> ..."
+        echo "  ssh_uni [-H <host>] [-U <username>] <ports>"
         echo
         echo "Options:"
         echo " -h, --help		Display this help message and exit."
