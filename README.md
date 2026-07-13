@@ -1,41 +1,37 @@
-# Useful scripts and configs for WSL
+# Setup WSL
 
-A collection of useful scripts and configs for a quick setup of the WSL2 system.
+A collection of shell scripts and configuration templates for a quick and consistent setup of Ubuntu-based WSL2 environments.
 
 ## Setup
 
-Start WSL by typing `wsl` from within a Windows shell. For the installation, refer to the [official documentation](https://learn.microsoft.com/en-us/windows/wsl/install).
+1. Start WSL by typing `wsl` from within a Windows shell. For the installation, refer to the [official documentation](https://learn.microsoft.com/en-us/windows/wsl/install).
 
-Download this repository. Since setting up git is part of this, you could use wget:
+2. Download this repository. If you want to setup `git` using the routines in this repository, you may use `wget`:
 
-```bash
-cd ~
-sudo apt install unzip wget
-wget https://github.com/bertan-karacora/setup-ubuntu/archive/refs/heads/main.zip
-unzip main.zip
-rm main.zip
-mv setup-ubuntu-main setup-ubuntu
-```
+    ```bash
+    cd ~
+    sudo apt install unzip wget
+    wget https://github.com/bertan-karacora/setup-wsl/archive/refs/heads/main.zip
+    unzip main.zip
+    rm main.zip
+    mv setup-wsl-main setup-wsl
+    ```
 
-Make sure to give execution permission for the setup script:
+3. Give execution permission for the setup script:
 
-```bash
-cd setup-ubuntu
-chmod +x setup.sh
-```
+    ```bash
+    cd setup-wsl
+    chmod +x setup.sh
+    ```
 
-## Installation
-
-1. Run the setup script (without sudo, you do require sudo rights and might be prompted for a password):
+4. Run the setup script (note that it requires sudo rights and will prompt you for a password):
 
     ```bash
     ./setup.sh
     ```
 
-Restart your shell to have it take effect.
+5. Open a new shell for the configurations to take effect.
 
 ## Usage
 
-The system has been setup for you.
-
-You can now use the bash_aliases from `bash_aliases.sh.template`, the functions in any file in the `libs` directory, and the scripts in the `scripts` directory.
+You can now use the predefined shell macros, aliases, and globally accessible scripts from the `libs`, `aliases`, and `scripts` directories. Please inspect the contents of these directories for details. If you ever want to add a function, an alias, or a helper script to your global shell environment, simply add them in the existing directories or files and they will automatically become available in new shells.

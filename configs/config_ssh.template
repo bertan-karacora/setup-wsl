@@ -1,3 +1,12 @@
+Host hazel
+    HostName hazel.informatik.uni-bonn.de
+    User karacora
+    ProxyJump karacora@login-stud.informatik.uni-bonn.de
+
+Host bender
+    HostName bender.hpc.uni-bonn.de
+    User s6bekara
+    
 Host github-hpc
     HostName github.com
     IdentityFile ~/.ssh/id_ed25519_hpc

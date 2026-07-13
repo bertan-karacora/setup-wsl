@@ -2,7 +2,7 @@
 
 set -e -u -o pipefail
 
-readonly path_repo="$(dirname "$(realpath "$BASH_SOURCE")")"
+readonly path_repo="$(dirname "$(realpath "${BASH_SOURCE[0]}")")"
 source "$path_repo/libs/io_utils.sh"
 
 show_help() {
@@ -43,18 +43,18 @@ check_wsl() {
 main() {
     parse_args "$@"
     check_wsl
-    ./scripts/setup_libs.sh
-    ./scripts/setup_aliases.sh
-    ./scripts/setup_scripts.sh
-    ./scripts/setup_packages.sh
+    scripts/setup_libs.sh
+    scripts/setup_aliases.sh
+    scripts/setup_scripts.sh
+    scripts/setup_packages.sh
     sudo scripts/disable_sudo_password.sh "$USER"
-    ./scripts/disable_apt_marketing_message.sh
-    ./scripts/fix_gpu_selection.sh
-    ./scripts/setup_wsl2.sh
-    ./scripts/setup_git.sh
-    ./scripts/setup_ssh.sh
-    ./scripts/setup_docker.sh
-    ./scripts/setup_cuda.sh
+    scripts/disable_apt_marketing_message.sh
+    scripts/fix_gpu_selection.sh
+    scripts/setup_wsl2.sh
+    scripts/setup_git.sh
+    scripts/setup_ssh.sh
+    scripts/setup_docker.sh
+    scripts/setup_cuda.sh
 }
 
 if [[ "${BASH_SOURCE[0]}" == "$0" ]]; then

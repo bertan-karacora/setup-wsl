@@ -2,7 +2,8 @@
 
 set -e -u -o pipefail
 
-readonly path_repo="$(dirname $(dirname $(realpath $BASH_SOURCE)))"
+readonly path_repo="$(dirname "$(dirname "$(realpath "${BASH_SOURCE[0]}")")")"
+source "$path_repo/libs/io_utils.sh"
 
 comment=""
 
