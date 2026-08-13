@@ -16,7 +16,7 @@ Setup libs.
 EOF
 }
 
-parse_params() {
+parse_args() {
     while (($#)); do
         case "${1-}" in
         -h | --help)
