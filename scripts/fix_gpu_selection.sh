@@ -5,29 +5,33 @@
 
 set -e -u -o pipefail
 
-readonly path_repo="$(dirname "$(dirname "$(realpath "${BASH_SOURCE[0]}")")")"
+path_repo="$(dirname "$(dirname "$(realpath "${BASH_SOURCE[0]}")")")"
 source "$path_repo/libs/io_utils.sh"
 
+readonly path_repo
+
 show_help() {
-    echo "Usage:"
-    echo "  ./fix_gpu_selection.sh [-h|--help]"
-    echo
-    echo "Fix GPU selection."
-    echo
+    cat <<EOF
+Usage:
+$(basename "${BASH_SOURCE[0]}") [-h | --help]
+
+Fix GPU selection.
+EOF
 }
 
-parse_args() {
-    local arg=""
-    while [[ "$#" -gt 0 ]]; do
-        arg="$1"
-        shift
-        case $arg in
+parse_params() {
+    while (($#)); do
+        case "${1-}" in
         -h | --help)
             show_help
             exit 0
             ;;
+        -?*)
+            echo "Unknown option: $1"
+            exit 1
+            ;;
         *)
-            echo "Unknown option $arg"
+            echo "Unexpected argument: $1"
             exit 1
             ;;
         esac
